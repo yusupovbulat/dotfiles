@@ -30,10 +30,10 @@ filetype plugin on
 syntax on
 
 "Cut/Copy/Paste using 'standart' hotkeys
-"vmap <C-c> "+yi
-"vmap <C-x> "+c
-"vmap <C-v> c<ESC>"+p
-"imap <C-v> <C-r><C-o>+
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <C-r><C-o>+
 
 set hlsearch
 set incsearch
