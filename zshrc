@@ -104,3 +104,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH=$PATH:~/bin
+
+# Aliases
+alias enru='setxkbmap "us,ru" ",winkeys" "grp:caps_toggle"'
+alias cal='cal -3 -m'
