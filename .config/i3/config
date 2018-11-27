@@ -1,0 +1,215 @@
+### Variables
+set $mod Mod4
+
+# use these keys for focus, movement, and resize derections when reaching for
+set $up k
+set $down j
+set $left h
+set $right l
+
+set $sink 'pactl list short sinks | grep RUNNING | cut -f1'
+
+### Settings
+font pango:System San Francisco Display 8
+#font pango:monospace 10
+#font xft:URWGothic-Book 11
+floating_modifier $mod
+
+# Configure boreder style <normal|1pixel|pexel x|none|pixel>
+new_window 1pixel
+new_float normal
+
+# Hide borders none|vertical|horizontal|both|smart
+hide_edge_borders smart
+
+# change borders
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
+
+### Bindings
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+popup_during_fullscreen smart
+
+# change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+set $ws1    1
+set $ws2    2
+set $ws3    3
+set $ws4    4
+set $ws5    5
+set $ws6    6
+set $ws7    7
+set $ws8    8
+set $ws9    9
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+
+# launch categorized menu
+#bindsym $mod+z exec --no-startup-id morc_menu
+bindsym $mod+F12 exec pactl set-sink-volume 0 +5% #increase sound volume
+bindsym $mod+F11 exec pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym $mod+F10 exec pactl set-sink-mute 0 toggle # mute sound
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Set shut down, restart and locking features
+#set $Locker i3lock && sleep 1
+set $Locker i3lock-fancy
+
+set $mode_system System (l) lock, (e) exit, (r) reboot, (s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Pause mode "$mode_system"
+
+
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# set primary gruvbox colorscheme colors
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+
+#start of window title bars & borders section
+
+# green gruvbox
+# class                 border|backgr|text|indicator|child_border
+client.focused          $green $green $darkgray $purple $green
+client.focused_inactive $gray $gray $yellow $purple $bg
+client.unfocused        $gray $gray $yellow $purple $bg
+client.urgent           $red $red $white $red $red
+
+# blue gruvbox
+# class                 border|backgr|text|indicator|child_border
+#client.focused          $blue $blue $darkgray $purple $darkgray
+#client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+#client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+#client.urgent           $red $red $white $red $red
+
+#end of window title bars & borders section
+
+
+# start rofi (a program launcher)
+bindsym $mod+d exec rofi -show run -lines 12 
+
+# Disable window titlebars entirely
+for_window [class="^.*"] border pixel 1
+
+#gaps inner 4 
+#gaps outer -4
+gaps inner 0 
+gaps outer 0
+
+smart_gaps on
+
+# Autostart applications
+#exec_always feh --bg-scale ~/.wallpapers/rocket_1980x1080.png
+exec_always numlockx
+exec_always --no-startup-id /home/user/.config/polybar/launch.sh &
+exec setxkbmap "us,ru" ",winkeys" "grp:caps_toggle"
+exec --no-startup-id xautolock -time 10 -locker i3lock-fancy
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+
+exec --no-startup-id i3-msg 'workspace 1; exec urxvt -e mutt'
+exec --no-startup-id i3-msg 'workspace 2; exec urxvt -e ranger'
+exec --no-startup-id i3-msg 'workspace 3; exec tor-browser'
+exec --no-startup-id i3-msg 'workspace 5; exec firefox'
+
+
+assign [class="Steam"] $ws8
+
