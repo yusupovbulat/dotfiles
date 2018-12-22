@@ -109,3 +109,5 @@ export PATH=$PATH:~/bin
 alias enru='setxkbmap "us,ru" ",winkeys" "grp:caps_toggle"'
 alias cal='cal -3 -m'
 alias la='ls -lah'
+alias te='trans en:ru'
+alias tr='trans ru:en'
