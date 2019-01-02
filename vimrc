@@ -2,12 +2,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'sirver/ultisnips'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'vim-scripts/javacomplete'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'kien/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'lifepillar/pgsql.vim'
 Plug 'shmup/vim-sql-syntax'
 Plug 'nvie/vim-flake8'
 Plug 'mattn/emmet-vim'
