@@ -10,7 +10,7 @@ set $right l
 set $sink 'pactl list short sinks | grep RUNNING | cut -f1'
 
 ### Settings
-font pango:System San Francisco Display 8
+font pango:System San Francisco Display 12
 #font pango:monospace 10
 #font xft:URWGothic-Book 11
 floating_modifier $mod
@@ -23,9 +23,9 @@ new_float normal
 hide_edge_borders smart
 
 # change borders
-bindsym $mod+u border none
-bindsym $mod+y border pixel 1
-bindsym $mod+n border normal
+#bindsym $mod+u border none
+#bindsym $mod+y border pixel 1
+#bindsym $mod+n border normal
 
 ### Bindings
 bindsym $mod+Return exec i3-sensible-terminal
@@ -113,6 +113,13 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+
+# scrot & gimp - root
+bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+# scrot & gimp - select window or rectangle
+#bindsym Mod1+Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+
+
 # Set shut down, restart and locking features
 #set $Locker i3lock && sleep 1
 set $Locker i3lock-fancy
@@ -163,14 +170,16 @@ set $purple #b16286
 set $aqua #689d68
 set $gray #a89984
 set $darkgray #1d2021
+set $milk #c5c8c6
+set $lgrey #606060
 
 #start of window title bars & borders section
 
 # green gruvbox
 # class                 border|backgr|text|indicator|child_border
-client.focused          $green $green $darkgray $purple $green
+client.focused          $milk $green $darkgray $purple $milk
 client.focused_inactive $gray $gray $yellow $purple $bg
-client.unfocused        $gray $gray $yellow $purple $bg
+client.unfocused        $gray $gray $yellow $purple $lgrey
 client.urgent           $red $red $white $red $red
 
 # blue gruvbox
@@ -187,12 +196,12 @@ client.urgent           $red $red $white $red $red
 bindsym $mod+d exec rofi -show run -lines 12 
 
 # Disable window titlebars entirely
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 3
 
-#gaps inner 4 
-#gaps outer -4
-gaps inner 0 
-gaps outer 0
+gaps inner 4 
+gaps outer -4
+#gaps inner 0 
+#gaps outer 0
 
 smart_gaps on
 
@@ -208,7 +217,7 @@ exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id i3-msg 'workspace 1; exec urxvt -e mutt'
 exec --no-startup-id i3-msg 'workspace 2; exec urxvt -e ranger'
 exec --no-startup-id i3-msg 'workspace 3; exec tor-browser'
-exec --no-startup-id i3-msg 'workspace 5; exec firefox'
+#exec --no-startup-id i3-msg 'workspace 5; exec firefox'
 
 
 assign [class="Steam"] $ws8
