@@ -116,8 +116,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # scrot & gimp - root
 bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
-# scrot & gimp - select window or rectangle
-#bindsym Mod1+Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
 
 
 # Set shut down, restart and locking features
