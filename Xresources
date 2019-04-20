@@ -1,13 +1,20 @@
 URxvt*font: xft:DejaVu Sans Mono:pixelsize=12
 URxvt*locale: true
 URxvt.scrollBar: false
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
 
 ! hard contrast: *background: #1d2021
-*background: #282828
+*background: #1d2021
 ! soft contrast: *background: #32302f
-*foreground: #ebdbb2
+*foreground: #f9f5d7
 ! Black + DarkGrey
-*color0:  #282828
+*color0:  #1d2021
 *color8:  #928374
 ! DarkRed + Red
 *color1:  #cc241d
@@ -28,5 +35,5 @@ URxvt.scrollBar: false
 *color6:  #689d6a
 *color14: #8ec07c
 ! LightGrey + White
-*color7:  #a89984
+*color7:  #f9f5d7
 *color15: #ebdbb2

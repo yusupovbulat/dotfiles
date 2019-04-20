@@ -15,6 +15,7 @@ Plug 'morhetz/gruvbox'
 call plug#end()
 
 let g:gruvbox_termcolors=256
+let g:gruvbox_contrast_dark='hard'
 set encoding=utf-8
 set mouse=a
 set number

@@ -159,18 +159,29 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # set primary gruvbox colorscheme colors
-set $bg #282828
+# set $bg #282828
+# set $red #cc241d
+# set $green #98971a
+# set $yellow #d79921
+# set $blue #458588
+# set $purple #b16286
+# set $aqua #689d68
+# set $gray #a89984
+# set $darkgray #1d2021
+# set $milk #c5c8c6
+# set $lgrey #606060
+
+set $bg #1d2021
 set $red #cc241d
-set $green #98971a
-set $yellow #d79921
+set $green #b8bb26
+set $yellow #fabd2f
 set $blue #458588
 set $purple #b16286
-set $aqua #689d68
+set $aqua #8ec07c
 set $gray #a89984
 set $darkgray #1d2021
 set $milk #c5c8c6
 set $lgrey #606060
-
 #start of window title bars & borders section
 
 # green gruvbox
