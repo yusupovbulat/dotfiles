@@ -1,7 +1,8 @@
-URxvt*font: xft:DejaVu Sans Mono:pixelsize=12
+urxvt*font: -*-terminus-medium-r-*-*-14-*-*-*-*-*-iso10646-1, -*-fixed-medium-r-*-*-14-*-*-*-*-*-iso10646-1
+URxvt.letterSpace: 0
 URxvt*locale: true
 URxvt.scrollBar: false
-Xft.dpi: 96
+Xft.dpi: 94
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb

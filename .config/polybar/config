@@ -24,7 +24,7 @@ monitor-fallback = HDMI-1
 monitor-strict = false
 override-redirect = false
 width = 100%
-height = 32
+height = 26
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0
@@ -39,27 +39,29 @@ line-color = #f00
 border-size = 0
 border-color = #00000000
 
-padding-left = 0
+padding-left = 2
 padding-right = 2
 
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "DejaVu Sans Mono:pixelsize=10;0"
-font-1 = "DejaVu Sans Mono:pixelsize=10;0"
-font-2 = "DejaVu Sans:pixelsize=10;0"
+;font-0 = "DejaVu Sans Mono:pixelsize=10;0:antialias=true"
+font-0 = "Terminus:pixelsize=10;0"
+font-1 = "Terminus:pixelsize=10;0"
+font-2 = "Terminus:fontformat=truetype:size=10:antialias=true"
 ;font-1 = unifont:fontformat=truetype:size=18:antialias=false;0
 ;font-2 = siji:pixelsize=18;1
 ;font-0 = "Tamsyn:pixelsize=12:antialias=true;0"
 ;font-1 = "Roboto:size=11:weight=bold;2"
 ;font-2 = "Noto Sans:size=11;1"
-font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=10;0"
-font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=10;0"
-font-5 = "Font Awesome 5 Brands:pixelsize=10;0"
+font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=10;0:antialias=true"
+font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=10;0:antialias=true"
+font-5 = "Weather Icons:size=12;1:antialias=true"
+;font-5 = "Font Awesome 5 Brands:pixelsize=10;0"
 
-modules-left = i3
-modules-center = xwindow
-modules-right = xkeyboard cpu memory volume date 
+modules-left = mpd 
+modules-center = i3 
+modules-right = xkeyboard filesystem cpu memory popup-calendar volume updates-arch openweathermap-detailed
 
 ;separator =
 
@@ -101,9 +103,20 @@ format-padding = 0
 label = %title%
 label-maxlen = 85
 
+[module/openweathermap-detailed]
+type = custom/script
+exec = ~/dotfiles/.config/polybar/polybar-scripts/openweathermap-detailed.sh
+interval = 600
+label-font = 6
+
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:85:...%
+
+[module/updates-arch]
+type = custom/script
+exec = ~/dotfiles/.config/polybar/polybar-scripts/updates-arch.sh
+interval = 60
 
 
 [module/xkeyboard]
@@ -143,6 +156,7 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
+mount-1 = /home
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
@@ -169,7 +183,6 @@ label-empty-padding = 2
 
 [module/i3]
 type = internal/i3
-format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
 ; Only show workspaces defined on the same output as the bar
@@ -178,7 +191,7 @@ wrapping-scroll = false
 ; on different bars
 ;
 ; Default: false
-pin-workspaces = true
+pin-workspaces = false
 
 ; This will split the workspace name on ':'
 ; Default: false
@@ -201,15 +214,29 @@ reverse-scroll = false
 ; Example: code;♚ will apply the icon to all workspaces
 ; containing 'code' in the label
 ; Default: false
-fuzzy-match = false
+fuzzy-match = true
 
+ws-icon-0 = 1;
+ws-icon-1 = 2;♛
+ws-icon-2 = 3;♜
+ws-icon-3 = 4;♝
+ws-icon-4 = 5;♞
+ws-icon-default = ♟
+
+format = <label-state> <label-mode>
+
+; Available tokens:
+;   %mode%
+; Default: %mode%
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = #e60053
 
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
 
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+;label-mode-foreground = #000
+;label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
@@ -234,16 +261,46 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 [module/mpd]
 type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+host = 127.0.0.1
+port = 6601
+;
+; Seconds to sleep between progressbar/song timer sync
+; Default: 1
+interval = 2
 
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
+format-online = <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next> <icon-repeat> <icon-random>  <label-time>  <label-song>
 
-label-song-maxlen = 25
-label-song-ellipsis = true
+;format-online = <icon-prev> <icon-stop> <toggle> <icon-next> <icon-random> <icon-repeat> <bar-progress> <label-song> 
+label-song = %artist% - %title%
+
+; Available tokens:
+;   None
+label-offline =  mpd is offline
+
+; Only applies if <icon-X> is used
+icon-play = 
+icon-pause = 
+icon-stop = 
+icon-prev = 
+icon-next = 
+icon-seekb = 
+icon-seekf = 
+icon-random = 
+icon-repeat = 
+icon-repeatone = 
+icon-single = 
+icon-consume = ✀
+
+; Used to display the state of random/repeat/repeatone/single
+; Only applies if <icon-[random|repeat|repeatone|single]> is used
+toggle-on-foreground = #ff
+toggle-off-foreground = #55
+
+; Only applies if <bar-progress> is used
+bar-progress-width = 15
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
 
 [module/xbacklight]
 type = internal/xbacklight
@@ -427,13 +484,19 @@ time = " %H:%M"
 ;date-alt = " %Y-%m-%d"
 ;time-alt = %H:%M:%S
 
-format =  <label>
+format = <label>
 format-prefix = 
 ;format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #0a6cf5
 ;format-underline = #9d0006
 
 label = %date%  %time%
+
+[module/popup-calendar]
+type = custom/script
+exec = ~/dotfiles/.config/polybar/polybar-scripts/popup-calendar.sh
+internal = 5
+click-left = ~/dotfiles/.config/polybar/polybar-scripts/popup-calendar.sh --popup
 
 [module/volume]
 type = internal/volume

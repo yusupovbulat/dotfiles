@@ -10,11 +10,22 @@ Plug 'shmup/vim-sql-syntax'
 Plug 'nvie/vim-flake8'
 Plug 'mattn/emmet-vim'
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'lervag/vimtex'
+Plug 'honza/vim-snippets'
+Plug 'mcchrish/nnn.vim'
 "colorscheme
 Plug 'morhetz/gruvbox'
 call plug#end()
 
 let g:gruvbox_termcolors=256
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+set conceallevel=1
+let g:tex_conceal='abdmg'
 let g:gruvbox_contrast_dark='hard'
 set encoding=utf-8
 set mouse=a
@@ -35,6 +46,8 @@ vmap <C-c> "+yi
 vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
 imap <C-v> <C-r><C-o>+
+
+autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 
 set hlsearch
 set incsearch

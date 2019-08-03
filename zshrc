@@ -1,3 +1,9 @@
+# compinit - autocomplete commands
+#
+
+autoload -U compinit && compinit 
+compinit
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -105,6 +111,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH=$PATH:~/bin
 
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+zstyle ':completion:*' rehash true
+
+
 # Aliases
 alias enru='setxkbmap "us,ru" ",winkeys" "grp:caps_toggle"'
 alias cal='cal -3 -m'
@@ -113,3 +123,13 @@ alias te='trans en:ru'
 alias tr='trans ru:en'
 alias od='oxd -d'
 alias os='oxd -s'
+
+if [ -f /usr/bin/grc ]; then
+ alias gcc="grc --colour=auto gcc"
+ alias irclog="grc --colour=auto irclog"
+ alias log="grc --colour=auto log"
+ alias netstat="grc --colour=auto netstat"
+ alias ping="grc --colour=auto ping"
+ alias proftpd="grc --colour=auto proftpd"
+ alias traceroute="grc --colour=auto traceroute"
+fi

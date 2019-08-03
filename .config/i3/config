@@ -115,7 +115,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 
 # scrot & gimp - root
-bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+bindsym Print exec scrot -e 'mv $f /home/user/pictures/screenshots/ && gimp /home/user/pictures/screenshots/$f'
 
 
 # Set shut down, restart and locking features
@@ -207,6 +207,9 @@ bindsym $mod+d exec rofi -show run -lines 12
 # Disable window titlebars entirely
 for_window [class="^.*"] border pixel 3
 
+# Enable floating for yad-calendar
+for_window [class="Yad" title="yad-calendar"] floating enable
+
 gaps inner 4 
 gaps outer -4
 #gaps inner 0 
@@ -225,7 +228,7 @@ exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 
 exec --no-startup-id i3-msg 'workspace 1; exec urxvt -e mutt'
 exec --no-startup-id i3-msg 'workspace 2; exec urxvt -e ranger'
-exec --no-startup-id i3-msg 'workspace 3; exec tor-browser'
+exec --no-startup-id i3-msg 'workspace 3; exec firefox'
 #exec --no-startup-id i3-msg 'workspace 5; exec firefox'
 
 
